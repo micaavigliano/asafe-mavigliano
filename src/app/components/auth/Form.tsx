@@ -1,5 +1,7 @@
 'use client'
 import { FormEvent, useRef, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 const createUser = async(email: string, password: string) => {
   const response = await fetch('/api/auth/signup', {
@@ -23,23 +25,28 @@ export function Form() {
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
   const [isLogin, setIsLogin] = useState(true);
+  const router = useRouter();
 
   const switchAuth = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     //add validation for the password
 
     if (isLogin) {
-      //log in
+      const result = await signIn('credentials', { 
+        redirect: false,
+        email: emailInput.current?.value,
+        password: passwordInput.current?.value
+      })
+      router.push('/dashboard')
     } else {
-      console.log('entra?')
       try {
         const result = createUser(emailInput.current?.value!, passwordInput.current?.value!);
-        console.log(result);
+
       } catch (error) {
         console.error(error)
       }
@@ -47,7 +54,7 @@ export function Form() {
   }
 
   return (
-    <section>
+    <section className="bg-green-600">
       <h1>{isLogin ? 'Login' : 'Sign up'}</h1>
       <form onSubmit={submitHandler}>
         <div>
