@@ -3,7 +3,6 @@
 import { getSession } from "next-auth/react"
 import { Session } from "next-auth";
 import { useState, useEffect } from "react";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
@@ -27,7 +26,7 @@ export default function Dashboard() {
   return (
     <main>
       <h2 className="text-neutral-950 dark:text-neutral-300">dashboard</h2>
-      <p>Welcome back, {loadedSession?.user?.email}</p>
+      <p className="text-neutral-950 dark:text-neutral-300">Welcome back, {loadedSession?.user?.email}</p>
     </main>
   )
 }

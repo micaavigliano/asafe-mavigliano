@@ -42,7 +42,11 @@ export function Form() {
         email: emailInput.current?.value,
         password: passwordInput.current?.value
       })
-      router.push('/dashboard')
+
+      if (!result?.error) {
+        router.push('/dashboard')
+      }
+      
     } else {
       try {
         const result = createUser(emailInput.current?.value!, passwordInput.current?.value!);

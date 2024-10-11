@@ -4,16 +4,18 @@ import { useSession, signOut } from "next-auth/react"
 import { useTheme } from "next-themes";
 import { redirect } from "next/navigation";
 import { CiLight, CiDark } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
   const { data: session } = useSession();
+  const router = useRouter()
   console.log(session)
 
   const logOutHandler = () => {
     signOut();
    // window.location.href = '/auth';
-    redirect('/auth')
+    router.push('/auth')
   }
 
   return (
