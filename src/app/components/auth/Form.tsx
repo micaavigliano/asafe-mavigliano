@@ -68,9 +68,8 @@ export function Form() {
         const result = await createUser(email, password);
         console.log('User created successfully:', result);
         router.push('/dashboard');
-      } catch (error: any) {
-        console.error('Error creating user:', error);
-        setErrorMessage(error.message || 'Something went wrong during signup.');
+      } catch (error) {
+        setErrorMessage((error as Error).message || 'Something went wrong during signup.');
       }
     }
   }
