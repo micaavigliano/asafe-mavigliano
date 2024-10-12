@@ -12,7 +12,7 @@ interface User {
 export default NextAuth({
   session: {
     strategy: 'jwt',
-    maxAge: 120
+    maxAge: 180
   },
   pages: {
     signIn: '/auth/',

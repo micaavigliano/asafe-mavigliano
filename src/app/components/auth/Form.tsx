@@ -3,6 +3,8 @@
 import { FormEvent, useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import InputField from "../reusableComponents/InputField";
+import Image from "next/image";
 
 const createUser = async (email: string, password: string) => {
   const response = await fetch('/api/auth/signup', {
@@ -72,32 +74,16 @@ export function Form() {
         setErrorMessage((error as Error).message || 'Something went wrong during signup.');
       }
     }
-  }
+  };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <section className="bg-green-600 flex flex-col justify-center items-center w-1/3 p-6 rounded-lg shadow-md">
-        <h1 className="text-xl mb-4">{isLogin ? 'Login' : 'Sign up'}</h1>
-        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-        <form onSubmit={submitHandler} className="flex flex-col w-full">
-          <div className="flex flex-col mb-3">
-            <label className="mb-1">Your Email</label>
-            <input 
-              type="email" 
-              required 
-              ref={emailInput} 
-              className="p-2 border rounded"
-            />
-          </div>
-          <div className="flex flex-col mb-3">
-            <label className="mb-1">Your Password</label>
-            <input 
-              type="password" 
-              required 
-              ref={passwordInput} 
-              className="p-2 border rounded"
-            />
-          </div>
+    <div className="grid grid-cols-2 min-h-screen">
+      <section className="flex flex-col justify-center items-center p-6">
+        <h1 className="text-xl mb-4 text-center text-neutral-950 dark:text-neutral-300">{isLogin ? 'Login' : 'Sign up'}</h1>
+        {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
+        <form onSubmit={submitHandler} className="flex flex-col w-full max-w-md">
+          <InputField type="email" ref={emailInput} label="Your email" />
+          <InputField type="password" ref={passwordInput} label="Your password" />
           <div className="flex flex-col gap-2 mt-4">
             <button 
               type="submit" 
@@ -115,6 +101,15 @@ export function Form() {
           </div>
         </form>
       </section>
+      <div className="relative">
+        <Image 
+          src="/comet.avif" 
+          alt="Comet image"
+          layout="fill" 
+          objectFit="cover"
+          priority
+        />
+      </div>
     </div>
   );
 }

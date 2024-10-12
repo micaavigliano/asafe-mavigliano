@@ -5,7 +5,9 @@ interface Data {
     id: string;
     name: string;
     name_limited: string;
-  }[]
+  }[];
+  url: string;
+  explanation: string;
 }
 
 const useFetch = (url: string) => {
