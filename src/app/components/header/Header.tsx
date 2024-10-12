@@ -10,11 +10,9 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const { data: session } = useSession();
   const router = useRouter()
-  console.log(session)
 
   const logOutHandler = () => {
     signOut();
-   // window.location.href = '/auth';
     router.push('/auth')
   }
 
