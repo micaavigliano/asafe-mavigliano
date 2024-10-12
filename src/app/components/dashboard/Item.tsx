@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 interface ItemsProps {
   name: string;
   limited_name: string;

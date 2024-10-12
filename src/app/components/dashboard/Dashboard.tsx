@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [loadedSession, setLoadedSession] = useState<Session | null>(null);
   const router = useRouter();
   const { data } = useFetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?&api_key=${process.env.NEXT_PUBLIC_API_KEY_NASA}`)
+  console.log(data)
 
   useEffect(() => {
     getSession().then(session => {

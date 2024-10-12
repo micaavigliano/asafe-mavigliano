@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
-interface FetchState<T> {
-  data: T | undefined;
-  loading: boolean;
-  error: boolean;
+interface Data {
+  near_earth_objects: {
+    id: string;
+    name: string;
+    name_limited: string;
+  }[]
 }
 
-const useFetch = <T = any>(url: string): FetchState<T> => {
-  const [data, setData] = useState<T | undefined>(undefined);
+const useFetch = (url: string) => {
+  const [data, setData] = useState<Data>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 

@@ -1,10 +1,19 @@
 import Item from "./Item"
 
 interface Container {
-  items: any
+  items: {
+    id: string;
+    name: string;
+    name_limited: string;
+  }[] | undefined;
 }
 
 export default function ItemsContainer({ items }: Container) {
+
+  if (!items || items.length === 0) {
+    return <p>No data available</p>;
+  }
+  
   return (
     <section className="grid grid-cols-2 gap-7">
       {items?.map((asteroid: any) => (

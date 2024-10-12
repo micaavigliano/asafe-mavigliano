@@ -2,7 +2,6 @@
 
 import { useSession, signOut } from "next-auth/react"
 import { useTheme } from "next-themes";
-import { redirect } from "next/navigation";
 import { CiLight, CiDark } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 
@@ -17,18 +16,18 @@ export function Header() {
   }
 
   return (
-    <header className="bg-pink-500 p-7 flex flex-row justify-between">
-      <h1>Asteroids app</h1>
-      <ul className="flex flex-row bg-red-300 gap-3">
+    <header className="bg-pink-500 p-7 flex flex-row justify-between items-center">
+      <h1 className="text-xl">Asteroids app</h1>
+      <ul className="flex flex-row gap-3 items-center">
         {session && (<li>
           <button onClick={logOutHandler}>Log out</button>
         </li>)}
-        <li>
+        <li className="flex items-center">
           <button
             onClick={() => (theme == "dark" ? setTheme("light") : setTheme("dark"))}
-            className="bg-gray-500 dark:bg-gray-800 rounded"
+            aria-label={theme === 'light' ? 'Change to dark theme' : 'Change to light theme'}
           >
-            {theme === 'light' ? <CiDark /> : <CiLight />}
+            {theme === 'light' ? <CiDark size={30} /> : <CiLight size={30} />}
           </button>
         </li>
       </ul>
