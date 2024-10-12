@@ -25,7 +25,6 @@ export function Form() {
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
   const [isLogin, setIsLogin] = useState<boolean>(true);
-  const [userCreated, setUserCreated] = useState<boolean>(false)
   const router = useRouter();
 
   const switchAuth = () => {
