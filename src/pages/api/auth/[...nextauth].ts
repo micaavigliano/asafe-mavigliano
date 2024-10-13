@@ -15,7 +15,7 @@ export default NextAuth({
     maxAge: 180
   },
   pages: {
-    signIn: '/auth/',
+    signIn: '/auth',
   },
   providers: [
     CredentialsProvider({

@@ -19,7 +19,7 @@ export default async function RootLayout({
   const session = await getServerSession()
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen" id="modal-root">
         <SessionProvider session={session}>
           <ThemeProviderContainer>
             <Header />

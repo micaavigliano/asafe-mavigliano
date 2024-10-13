@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import InputField from "../reusableComponents/InputField";
 import Image from "next/image";
+import Button from "../reusableComponents/Button";
 
 const createUser = async (email: string, password: string) => {
   const response = await fetch('/api/auth/signup', {
@@ -29,6 +30,7 @@ export function Form() {
   const passwordInput = useRef<HTMLInputElement>(null);
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const switchAuth = () => {
@@ -52,6 +54,8 @@ export function Form() {
       return;
     }
 
+    setLoading(true);
+
     if (isLogin) {
       const result = await signIn('credentials', { 
         redirect: false,
@@ -74,6 +78,8 @@ export function Form() {
         setErrorMessage((error as Error).message || 'Something went wrong during signup.');
       }
     }
+
+    setLoading(false);
   };
 
   return (
@@ -85,12 +91,9 @@ export function Form() {
           <InputField type="email" ref={emailInput} label="Your email" />
           <InputField type="password" ref={passwordInput} label="Your password" />
           <div className="flex flex-col gap-2 mt-4">
-            <button 
-              type="submit" 
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
+            <Button loading={loading}>
               {isLogin ? 'Login' : 'Create account'}
-            </button>
+            </Button>
             <button 
               type="button" 
               onClick={switchAuth} 
@@ -105,9 +108,9 @@ export function Form() {
         <Image 
           src="/comet.avif" 
           alt="Comet image"
-          layout="fill" 
-          objectFit="cover"
-          priority
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="50vw"
         />
       </div>
     </div>
