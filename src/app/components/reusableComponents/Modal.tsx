@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import { MdClose } from "react-icons/md";
 import ReactDOM from "react-dom";
 import Button from "./Button";
