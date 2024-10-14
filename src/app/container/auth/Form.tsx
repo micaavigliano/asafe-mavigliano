@@ -3,9 +3,9 @@
 import { FormEvent, useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from 'next/navigation';
-import InputField from "../reusableComponents/InputField";
+import InputField from "../../components/InputField";
 import Image from "next/image";
-import Button from "../reusableComponents/Button";
+import Button from "../../components/Button";
 
 const createUser = async (email: string, password: string) => {
   const response = await fetch('/api/auth/signup', {
@@ -83,28 +83,29 @@ export function Form() {
   };
 
   return (
-    <div className="grid grid-cols-2 min-h-screen">
+    <div className="grid max-[430px]:grid-cols-1 grid-cols-2 min-h-screen">
       <section className="flex flex-col justify-center items-center p-6">
         <h1 className="text-xl mb-4 text-center text-neutral-950 dark:text-neutral-300">{isLogin ? 'Login' : 'Sign up'}</h1>
         {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
         <form onSubmit={submitHandler} className="flex flex-col w-full max-w-md">
-          <InputField type="email" ref={emailInput} label="Your email" />
-          <InputField type="password" ref={passwordInput} label="Your password" />
+          <InputField type="email" ref={emailInput} label="Your email" id="email-input" />
+          <InputField type="password" ref={passwordInput} label="Your password" id="password-input" />
           <div className="flex flex-col gap-2 mt-4">
             <Button loading={loading}>
               {isLogin ? 'Login' : 'Create account'}
             </Button>
-            <button 
+            <Button 
               type="button" 
               onClick={switchAuth} 
-              className="bg-gray-500 text-white px-4 py-2 rounded"
+              className="bg-gray-500 text-white px-4 py-2 rounded text-center"
+              variant="secondary"
             >
               {isLogin ? 'Create new account' : 'Login with existing account'}
-            </button>
+            </Button>
           </div>
         </form>
       </section>
-      <div className="relative">
+      <div className="relative max-[430px]:hidden block">
         <Image 
           src="/comet.avif" 
           alt="Comet image"

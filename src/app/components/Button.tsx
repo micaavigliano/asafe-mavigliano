@@ -19,7 +19,7 @@ const Button = ({ children, variant = "primary", loading = false, onClick, ...pr
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+      className={`${baseStyles} ${variants[variant]} ${loading ? "opacity-70 cursor-not-allowed text-center" : ""}`}
       onClick={onClick}
       disabled={loading}
       {...props}

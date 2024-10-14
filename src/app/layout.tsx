@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import SessionProvider from './providers/SessionProvider'
 import "./globals.css";
-import Header from "./components/header/Header";
+import Header from "./container/header/Header";
 import { ThemeProviderContainer } from "./providers/ThemeProvider";
-import Footer from "./components/Footer/Footer";
+import Footer from "./container/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Asteroids App",
