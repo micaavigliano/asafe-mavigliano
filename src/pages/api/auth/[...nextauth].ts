@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectToDB } from '@/app/helpers/db';
-import { verifyPass } from '@/app/helpers/auth';
+import { connectToDB } from '../../../app/helpers/db';
+import { verifyPass } from '../../../app/helpers/auth';
 import { WithId } from 'mongodb';
 interface User {
   id: string;

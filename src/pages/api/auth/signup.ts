@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { connectToDB } from '@/app/helpers/db';
-import { hashPassword } from '@/app/helpers/auth';
+import { connectToDB } from '../../../app/helpers/db';
+import { hashPassword } from '../../../app/helpers/auth';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {

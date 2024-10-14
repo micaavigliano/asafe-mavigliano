@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { axisBottom, axisLeft, scaleBand, scaleLinear, select } from 'd3';
-import { ApproachData } from '@/interface/asteroid';
+import { ApproachData } from '../../../interface/asteroid';
 
 interface ChartProps {
   distance: ApproachData[];

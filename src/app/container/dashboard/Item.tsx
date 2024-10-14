@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { GiAsteroid } from "react-icons/gi";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
-import { averageDiameter } from "@/app/helpers/helpers";
+import { averageDiameter } from "../../helpers/helpers";
 import Chart from "../chart/Chart";
-import { ApproachData } from "@/interface/asteroid";
+import { ApproachData } from "../../../interface/asteroid";
 
 interface ItemsProps {
   id: string;

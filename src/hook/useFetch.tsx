@@ -1,4 +1,4 @@
-import { Asteroid } from '@/interface/asteroid';
+import { Asteroid } from '../interface/asteroid';
 import { useEffect, useState } from 'react';
 
 interface Data {

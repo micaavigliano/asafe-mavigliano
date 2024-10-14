@@ -49,7 +49,7 @@ export function Form() {
       setErrorMessage('Please provide both email and password.');
     }
 
-    if (password.trim().length < 7) {
+    if (password!.trim().length < 7) {
       setErrorMessage('Password must be at least 7 characters long.');
       return;
     }
@@ -71,7 +71,7 @@ export function Form() {
 
     } else {
       try {
-        const result = await createUser(email, password);
+        const result = await createUser(email!, password!);
         console.log('User created successfully:', result);
         router.push('/dashboard');
       } catch (error) {
