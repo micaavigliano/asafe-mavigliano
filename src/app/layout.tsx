@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import SessionProvider from './providers/SessionProvider'
@@ -19,6 +20,7 @@ export default async function RootLayout({
   const session = await getServerSession()
   return (
     <html lang="en">
+      <link rel="icon" href="/sparkles.png" type="image/png" sizes="32x32" />
       <body className="flex flex-col min-h-screen" id="modal-root">
         <SessionProvider session={session}>
           <ThemeProviderContainer>
