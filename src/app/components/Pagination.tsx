@@ -3,7 +3,6 @@ import { GrFormPrevious } from "react-icons/gr";
 import { MdSkipPrevious, MdSkipNext, MdNavigateNext } from "react-icons/md";
 import Button from './Button';
 
-
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -15,12 +14,10 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPage, prevPage, goToPage }) => {
   const getPageNumbers = () => {
     const totalShownPages = 15;
-    
+
     if (totalPages <= totalShownPages) {
       return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
-
-    console.log(totalPages)
 
     const firstPage = 1;
     const lastPage = totalPages;
@@ -48,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
       <div className='flex flex-row gap-3 max-[430px]:gap-1'>
         <Button
           variant='link'
-          onClick={() => goToPage(0)}
+          onClick={() => goToPage(1)}
           className='text-neutral-950 dark:text-neutral-300'
         >
           <MdSkipPrevious />
@@ -59,14 +56,6 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           variant='link'
         >
           <GrFormPrevious className='text-neutral-950 dark:text-neutral-300'/>
-        </Button>
-        <Button
-          onClick={prevPage}
-          disabled={currentPage === 0}
-          key="prev-button"
-          variant='link'
-        >
-          Previous
         </Button>
         {pageNumbers.map((number) => {
           if (number === 'left-ellipsis' || number === 'right-ellipsis') {
@@ -79,40 +68,31 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           return (
             <Button
               key={`page-${number}`}
-              onClick={() => goToPage(Number(number) - 1)}
-              className={currentPage === Number(number) - 1 ? 'active' : ''}
+              onClick={() => goToPage(Number(number))}
+              className={currentPage === Number(number) ? 'active' : ''}
               variant='link'
             >
               {number}
             </Button>
           );
         })}
-
-        <Button
-          onClick={nextPage}
-          disabled={currentPage >= totalPages - 1}
-          key="next-button"
-          variant="link"
-        >
-          Next
-        </Button>
         <Button
           variant='link'
           onClick={nextPage}
-          disabled={currentPage >= totalPages - 1}
+          disabled={currentPage >= totalPages}
         >
           <MdNavigateNext className='text-neutral-950 dark:text-neutral-300' />
         </Button>
         <Button
           variant='link'
-          onClick={() => goToPage(totalPages - 1)}
+          onClick={() => goToPage(totalPages)}
           className='text-neutral-950 dark:text-neutral-300'
         >
           <MdSkipNext />
         </Button>
       </div>
       <p>
-        Page {currentPage + 1} of {totalPages}
+        Page {currentPage} of {totalPages}
       </p>
     </div>
   );

@@ -10,11 +10,10 @@ interface Data {
   };
 }
 
-const useFetch = (url: string, initialPage: number = 0, pageSize: number = 20) => {
+const useFetch = (url: string, currentPage: number = 0, pageSize: number = 20) => {
   const [data, setData] = useState<Data | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(initialPage);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,27 +38,11 @@ const useFetch = (url: string, initialPage: number = 0, pageSize: number = 20) =
     fetchData();
   }, [url, currentPage, pageSize]);
 
-  const nextPage = () => {
-    if (data && currentPage < data.page.total_pages - 1) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  const prevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
-
   return {
     data: data?.near_earth_objects || [],
     loading,
     error,
-    currentPage,
     totalPages: data?.page.total_pages || 0,
-    nextPage,
-    prevPage,
-    setCurrentPage,
   };
 };
 

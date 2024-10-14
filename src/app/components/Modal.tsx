@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { MdClose } from "react-icons/md";
 import ReactDOM from "react-dom";
 import Button from "./Button";
@@ -13,7 +13,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, title }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleKeyDown = (event: KeyboardEvent) => {
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape" && onClose) {
       onClose();
     }
@@ -22,7 +22,6 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, title }) => {
       const focusableElements = modalRef.current?.querySelectorAll<HTMLElement>(
         'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
       );
-      console.log(focusableElements);
 
       const elements = Array.from(focusableElements || []).filter(
         (el) => !el.hasAttribute("disabled")
@@ -41,15 +40,13 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, title }) => {
         event.preventDefault();
       }
     }
-  };
+  }, [onClose]);
 
   useEffect(() => {
-    console.log(isOpen, modalRef.current)
     if (isOpen && modalRef.current) {
       const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
         'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
       );
-      console.log(focusableElements);
 
       if (focusableElements?.length) {
         requestAnimationFrame(() => {
@@ -76,21 +73,21 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, title }) => {
         isOpen ? "block" : "hidden"
       }`}
     >
-      <div className="text-center w-6/12 h-2/4 max-[430px]:w-10/12 bg-white rounded-2xl flex flex-col overflow-hidden">
-        <div className="flex flex-row justify-between items-center p-2 bg-slate-300">
-          <h2 id="modal-id" className="text-neutral-950">
+      <div className="text-center w-6/12 h-2/4 max-[430px]:w-10/12 bg-white dark:bg-slate-800 rounded-2xl flex flex-col overflow-hidden">
+        <div className="flex flex-row justify-between items-center p-2 dark:bg-slate-950 bg-slate-500">
+          <h2 id="modal-id" className="text-neutral-950 dark:text-neutral-300">
             {title}
           </h2>
           <Button
             onClick={onClose}
             variant="link"
             aria-label="close modal"
-            className="text-neutral-950"
+            className="text-neutral-950 dark:text-neutral-300"
           >
             <MdClose />
           </Button>
         </div>
-        <div className="h-4/6 overflow-auto text-left p-4">{children}</div>
+        <div className="overflow-auto text-left p-4">{children}</div>
       </div>
     </div>,
     document.getElementById("modal-root") as HTMLElement

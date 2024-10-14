@@ -112,6 +112,7 @@ export function Form() {
           fill
           style={{ objectFit: "cover" }}
           sizes="50vw"
+          priority
         />
       </div>
     </div>

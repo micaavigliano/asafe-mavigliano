@@ -4,25 +4,39 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import useFetch from '@/hook/useFetch';
 import ItemsContainer from './ItemsContainer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
 
 export default function Dashboard() {
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { data, currentPage, totalPages, nextPage, prevPage, setCurrentPage } = useFetch(
+  
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageFromQuery = Number(urlParams.get('page')) || 1;
+
+    if (pageFromQuery !== currentPage) {
+      setCurrentPage(pageFromQuery);
+    }
+  }, [currentPage]);
+
+  const { data, totalPages } = useFetch(
     `https://api.nasa.gov/neo/rest/v1/neo/browse?&api_key=${process.env.NEXT_PUBLIC_API_KEY_NASA}`,
-    0,
+    currentPage - 1,
     20
   );
-
-  console.log(data)
 
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/auth');
     }
   }, [status, router]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    router.replace(`?page=${newPage}`);
+  };
 
   if (status === 'loading') {
     return <p>Loading...</p>;
@@ -37,11 +51,15 @@ export default function Dashboard() {
         Here you can find more information about asteroids:
       </p>
       <ItemsContainer items={data} />
-      {data && <Pagination currentPage={currentPage}
-        totalPages={totalPages}
-        nextPage={nextPage}
-        prevPage={prevPage}
-        goToPage={setCurrentPage} />}
+      {data && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          nextPage={() => handlePageChange(currentPage + 1)}
+          prevPage={() => handlePageChange(currentPage - 1)}
+          goToPage={handlePageChange}
+        />
+      )}
     </main>
   );
 }

@@ -21,7 +21,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           required 
           ref={ref}
           id={id}
-          className="p-2 border rounded text-center text-neutral-950 dark:text-neutral-300"
+          className="p-2 border rounded text-center text-neutral-950 dark:text-neutral-300 outline outline-2"
         />
       </div>
     );
