@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react';
 import { useSession, signOut } from "next-auth/react"
 import { useTheme } from "next-themes";
 import { CiLight, CiDark } from "react-icons/ci";

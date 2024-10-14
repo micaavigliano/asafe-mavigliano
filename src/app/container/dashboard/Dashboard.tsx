@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import useFetch from '../../../hook/useFetch';
 import ItemsContainer from './ItemsContainer';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
 
 export default function Dashboard() {

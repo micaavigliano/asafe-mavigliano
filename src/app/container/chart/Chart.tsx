@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { axisBottom, axisLeft, scaleBand, scaleLinear, select } from 'd3';
 import { ApproachData } from '../../../interface/asteroid';
 

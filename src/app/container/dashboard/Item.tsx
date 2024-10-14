@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiAsteroid } from "react-icons/gi";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
