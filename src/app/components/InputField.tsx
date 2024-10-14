@@ -4,10 +4,11 @@ interface InputFieldProps {
   label: string;
   type: 'email' | 'password';
   id: string;
+  dataTestid: string;
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, type, id }, ref) => {
+  ({ label, type, id, dataTestid }, ref) => {
     return (
       <div className="flex flex-col mb-3">
         <label 
@@ -16,7 +17,8 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
         >
           {label}
         </label>
-        <input 
+        <input
+          data-testid={dataTestid}
           type={type} 
           required 
           ref={ref}

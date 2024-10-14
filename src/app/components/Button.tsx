@@ -13,13 +13,13 @@ const Button = ({ children, variant = "primary", loading = false, onClick, ...pr
   
   const variants = {
     primary: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300",
-    secondary: "bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-300",
+    secondary: "bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-300 px-2 py-1",
     link: "bg-transparent text-white",
   };
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${loading ? "opacity-70 cursor-not-allowed text-center" : ""}`}
+      className={`${baseStyles} ${variants[variant]} ${loading ? "opacity-70 cursor-not-allowed" : ""} flex justify-center items-center`}
       onClick={onClick}
       disabled={loading}
       {...props}

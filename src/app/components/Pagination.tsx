@@ -14,14 +14,13 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPage, prevPage, goToPage }) => {
   const getPageNumbers = () => {
     const totalShownPages = 15;
-
+    const firstPage = 1;
+    const lastPage = totalPages;
+    
     if (totalPages <= totalShownPages) {
       return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
 
-    const firstPage = 1;
-    const lastPage = totalPages;
-    
     const shouldShowLeftEllipsis = currentPage > 4;
     const shouldShowRightEllipsis = currentPage < totalPages - 3;
 
@@ -33,6 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
       shouldShowLeftEllipsis ? 'left-ellipsis' : null,
       ...pagesAroundCurrent,
       shouldShowRightEllipsis ? 'right-ellipsis' : null,
+      lastPage
     ];
 
     return pageNumbers.filter(Boolean);
@@ -47,12 +47,13 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           variant='link'
           onClick={() => goToPage(1)}
           className='text-neutral-950 dark:text-neutral-300'
+          disabled={currentPage === 1}
         >
           <MdSkipPrevious />
         </Button>
         <Button
           onClick={prevPage}
-          disabled={currentPage === 0}
+          disabled={currentPage === 1}
           variant='link'
         >
           <GrFormPrevious className='text-neutral-950 dark:text-neutral-300'/>
@@ -60,7 +61,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
         {pageNumbers.map((number) => {
           if (number === 'left-ellipsis' || number === 'right-ellipsis') {
             return (
-              <span key={number} className="ellipsis">
+              <span key={number}>
                 ...
               </span>
             );
@@ -69,7 +70,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
             <Button
               key={`page-${number}`}
               onClick={() => goToPage(Number(number))}
-              className={currentPage === Number(number) ? 'active' : ''}
+              className={currentPage === Number(number) ? 'underline underline-offset-3' : ''}
               variant='link'
             >
               {number}
@@ -87,6 +88,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           variant='link'
           onClick={() => goToPage(totalPages)}
           className='text-neutral-950 dark:text-neutral-300'
+          disabled={currentPage === totalPages}
         >
           <MdSkipNext />
         </Button>

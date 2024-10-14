@@ -1,13 +1,17 @@
-import { Asteroid } from '@/interface/asteroid';
+import { Asteroid } from '../../../interface/asteroid';
 import React, { Suspense, lazy } from 'react';
 
 const Item = lazy(() => import('./Item'));
 
 interface Container {
   items: Asteroid[] | undefined;
+  loading: boolean
 }
 
-export default function ItemsContainer({ items }: Container) {
+export default function ItemsContainer({ items, loading }: Container) {
+
+  if (loading) return <p className='text-neutral-950 dark:text-neutral-300 text-center'>Loading items...</p>
+
   return (
     <Suspense fallback={<p className='text-neutral-950 dark:text-neutral-300 text-center'>Loading items...</p>}>
       <div className="grid max-[430px]:grid-cols-1 grid-cols-2 gap-7 place-items-center">
@@ -30,6 +34,7 @@ export default function ItemsContainer({ items }: Container) {
               minDiameter={asteroid.estimated_diameter.meters.estimated_diameter_min}
               distance={reducedData}
               id={asteroid.id}
+              magnitude={asteroid.absolute_magnitude_h}
             />
           );
         })}

@@ -9,6 +9,7 @@ export interface Asteroid {
   id: string;
   name: string;
   name_limited: string;
+  absolute_magnitude_h: number;
   estimated_diameter: {
     meters: {
       estimated_diameter_max: number;

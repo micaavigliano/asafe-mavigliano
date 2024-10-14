@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import useFetch from '@/hook/useFetch';
+import useFetch from '../../../hook/useFetch';
 import ItemsContainer from './ItemsContainer';
 import { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
@@ -15,13 +15,10 @@ export default function Dashboard() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const pageFromQuery = Number(urlParams.get('page')) || 1;
+    setCurrentPage(pageFromQuery);
+  }, []);
 
-    if (pageFromQuery !== currentPage) {
-      setCurrentPage(pageFromQuery);
-    }
-  }, [currentPage]);
-
-  const { data, totalPages } = useFetch(
+  const { data, totalPages, loading } = useFetch(
     `https://api.nasa.gov/neo/rest/v1/neo/browse?&api_key=${process.env.NEXT_PUBLIC_API_KEY_NASA}`,
     currentPage - 1,
     20
@@ -34,8 +31,20 @@ export default function Dashboard() {
   }, [status, router]);
 
   const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
+    setCurrentPage(newPage); 
     router.replace(`?page=${newPage}`);
+  };
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      handlePageChange(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      handlePageChange(currentPage - 1);
+    }
   };
 
   if (status === 'loading') {
@@ -50,13 +59,13 @@ export default function Dashboard() {
       <p className="text-neutral-950 dark:text-neutral-300 text-xl m-4">
         Here you can find more information about asteroids:
       </p>
-      <ItemsContainer items={data} />
+      <ItemsContainer items={data} loading={loading} />
       {data && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          nextPage={() => handlePageChange(currentPage + 1)}
-          prevPage={() => handlePageChange(currentPage - 1)}
+          nextPage={nextPage}
+          prevPage={prevPage}
           goToPage={handlePageChange}
         />
       )}

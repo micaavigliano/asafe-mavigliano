@@ -13,9 +13,9 @@ const Chart = ({ distance }: ChartProps) => {
     if (!distance || distance.length === 0) return;
 
     const svg = select(chartRef.current);
-    const width = 1000;
-    const height = 1000;
-    const margin = { top: 100, right: 100, bottom: 100, left: 100 };
+    const width = 750;
+    const height = 600;
+    const margin = { top: 60, right: 60, bottom: 60, left: 70 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -59,7 +59,7 @@ const Chart = ({ distance }: ChartProps) => {
 
   return (
     <>
-      <p className='text-neutral-950 dark:text-neutral-300'>Historical closest approach to earth</p>
+      <p className='text-neutral-950 dark:text-neutral-300'>Historical closest approaches to earth</p>
       <svg ref={chartRef} className='text-neutral-950 dark:text-neutral-300' />
     </>
   );

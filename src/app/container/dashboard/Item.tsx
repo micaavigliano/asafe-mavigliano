@@ -9,13 +9,14 @@ import { ApproachData } from "@/interface/asteroid";
 interface ItemsProps {
   id: string;
   name: string;
+  magnitude: number;
   limited_name?: string;
   minDiameter: number;
   maxDiameter: number;
   distance: ApproachData[];
 }
 
-export default function Item({ name, minDiameter, maxDiameter, distance, id }: ItemsProps) {
+export default function Item({ name, minDiameter, maxDiameter, distance, id, magnitude }: ItemsProps) {
   const [itemId, setItemId] = useState<number | null>(null);
   const [openModal, setModal] = useState<boolean>(false);
 
@@ -44,16 +45,16 @@ export default function Item({ name, minDiameter, maxDiameter, distance, id }: I
   return (
     <section className="p-4 w-4/6 align-middle rounded-md shadow-md shadow-slate-400">
       <div className="flex flex-row items-center text-neutral-950 dark:text-neutral-300">
-        <h3 className="mr-4 text-xl">{name}</h3>
+        <h3 className="my-2 text-xl">{name}</h3>
         <GiAsteroid />
       </div>
-      <p className="text-neutral-950 dark:text-neutral-300"><strong>Diameter:</strong> {averageDiameter(minDiameter, maxDiameter).toFixed(3)} meters</p>
+      <p className="text-neutral-950 dark:text-neutral-300 my-2"><strong>Diameter:</strong> {averageDiameter(minDiameter, maxDiameter).toFixed(3)} meters</p>
+      <p className="text-neutral-950 dark:text-neutral-300 my-2"><strong>Magnitude:</strong> {magnitude}</p>
       <Button
         aria-label={`See more information about ${name}`}
         onClick={() => handleClick(Number(id))}
         variant="secondary"
         data-item-id={id}
-        className="text-neutral-950 dark:text-neutral-300"
       >
         More info
       </Button>

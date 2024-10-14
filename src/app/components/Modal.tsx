@@ -73,7 +73,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, title }) => {
         isOpen ? "block" : "hidden"
       }`}
     >
-      <div className="text-center w-6/12 h-2/4 max-[430px]:w-10/12 bg-white dark:bg-slate-800 rounded-2xl flex flex-col overflow-hidden">
+      <div className="text-center w-10/12 h-5/6 max-[430px]:w-10/12 bg-white dark:bg-slate-800 rounded-2xl flex flex-col overflow-hidden">
         <div className="flex flex-row justify-between items-center p-2 dark:bg-slate-950 bg-slate-500">
           <h2 id="modal-id" className="text-neutral-950 dark:text-neutral-300">
             {title}
