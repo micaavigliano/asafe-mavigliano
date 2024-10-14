@@ -6,12 +6,12 @@ import { averageDiameter } from "@/app/helpers/helpers";
 
 interface ItemsProps {
   name: string;
-  limited_name: string;
+  limited_name?: string;
   minDiameter: number;
   maxDiameter: number;
 }
 
-export default function Item({ name, limited_name, minDiameter, maxDiameter }: ItemsProps) {
+export default function Item({ name, minDiameter, maxDiameter }: ItemsProps) {
   const [openModal, setModal] = useState<boolean>(false);
 
   const handleModal = () => {

@@ -65,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, title }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, handleKeyDown]);
 
   return ReactDOM.createPortal(
     <div

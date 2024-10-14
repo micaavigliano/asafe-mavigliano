@@ -37,7 +37,7 @@ const useFetch = (url: string, initialPage: number = 0, pageSize: number = 20) =
     };
 
     fetchData();
-  }, [url, currentPage]);
+  }, [url, currentPage, pageSize]);
 
   const nextPage = () => {
     if (data && currentPage < data.page.total_pages - 1) {
