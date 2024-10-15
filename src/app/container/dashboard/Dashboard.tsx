@@ -52,7 +52,7 @@ export default function Dashboard() {
   }
 
   return (
-    <main>
+    <main data-testid="dashboard">
       <h2 className="text-neutral-950 dark:text-neutral-300 text-2xl m-4">
         Welcome back, {session?.user?.email} 👋
       </h2>
