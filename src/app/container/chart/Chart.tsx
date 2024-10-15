@@ -13,10 +13,10 @@ const Chart = ({ distance }: ChartProps) => {
     if (!distance || distance.length === 0) return;
 
     const svg = select(chartRef.current);
-    const width = 750;
+    const width = 2000;
     const height = 600;
     const margin = { top: 60, right: 60, bottom: 60, left: 70 };
-    const innerWidth = width - margin.left - margin.right;
+    const innerWidth = width;
     const innerHeight = height - margin.top - margin.bottom;
 
     svg.selectAll('*').remove();
