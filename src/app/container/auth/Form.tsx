@@ -86,7 +86,7 @@ export function Form() {
     <div className="grid max-[430px]:grid-cols-1 grid-cols-2 min-h-screen" data-testid="form-container">
       <section className="flex flex-col justify-center items-center p-6">
         <h1 className="text-xl mb-4 text-center text-neutral-950 dark:text-neutral-300" data-test-id="title-cypress">{isLogin ? 'Login' : 'Sign up'}</h1>
-        {errorMessage && <p className="text-red-500 mb-2" data-testid="error-msg">{errorMessage}</p>}
+        {errorMessage && <p className="text-red-500 mb-2" data-testid="error-msg" aria-live="polite" live-region="true">{errorMessage}</p>}
         <form onSubmit={submitHandler} className="flex flex-col w-full max-w-md">
           <InputField type="email" ref={emailInput} label="Your email" id="email-input" dataTestid="email-input" />
           <InputField type="password" ref={passwordInput} label="Your password" id="password-input" dataTestid="password-input" />

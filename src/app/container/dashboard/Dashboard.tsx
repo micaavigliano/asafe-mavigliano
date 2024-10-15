@@ -48,7 +48,7 @@ export default function Dashboard() {
   };
 
   if (status === 'loading') {
-    return <p>Loading...</p>;
+    return <p aria-live='polite' live-region="true">Loading...</p>;
   }
 
   return (

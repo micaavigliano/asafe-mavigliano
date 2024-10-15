@@ -24,7 +24,7 @@ const Button = ({ children, variant = "primary", loading = false, onClick, ...pr
       disabled={loading}
       {...props}
     >
-      {loading ? <TbLoader size={25} className="animate-spin text-center" /> : children}
+      {loading ? <TbLoader size={25} className="animate-spin text-center" aria-live="polite" live-region="true" /> : children}
     </button>
   );
 };

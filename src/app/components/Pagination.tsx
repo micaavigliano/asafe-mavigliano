@@ -48,6 +48,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           onClick={() => goToPage(1)}
           className='text-neutral-950 dark:text-neutral-300'
           disabled={currentPage === 1}
+          aria-label="Go to the first item"
         >
           <MdSkipPrevious />
         </Button>
@@ -55,6 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           onClick={prevPage}
           disabled={currentPage === 1}
           variant='link'
+          aria-label={`go back to the item number ${currentPage - 1}`}
         >
           <GrFormPrevious className='text-neutral-950 dark:text-neutral-300'/>
         </Button>
@@ -81,6 +83,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           variant='link'
           onClick={nextPage}
           disabled={currentPage >= totalPages}
+          aria-label={`go to the item number ${currentPage + 1}`}
         >
           <MdNavigateNext className='text-neutral-950 dark:text-neutral-300' />
         </Button>
@@ -89,6 +92,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
           onClick={() => goToPage(totalPages)}
           className='text-neutral-950 dark:text-neutral-300'
           disabled={currentPage === totalPages}
+          aria-label="go to the last item"
         >
           <MdSkipNext />
         </Button>
