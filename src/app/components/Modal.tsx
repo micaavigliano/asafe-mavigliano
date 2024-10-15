@@ -13,6 +13,8 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, title }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
+  // The function to handle the focus trap inside a modal it is important to ensure the accessibility in the application. The focus should not be lost through the 
+  // application.  
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape" && onClose) {
       onClose();

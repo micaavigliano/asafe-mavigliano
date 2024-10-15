@@ -10,10 +10,10 @@ interface Container {
 
 export default function ItemsContainer({ items, loading }: Container) {
 
-  if (loading) return <p className='text-neutral-950 dark:text-neutral-300 text-center'>Loading items...</p>
+  if (loading) return <p className='text-neutral-950 dark:text-neutral-300 text-center' aria-live="polite" live-region="true">Loading items...</p>
 
   return (
-    <Suspense fallback={<p className='text-neutral-950 dark:text-neutral-300 text-center'>Loading items...</p>}>
+    <Suspense fallback={<p className='text-neutral-950 dark:text-neutral-300 text-center' aria-live="polite" live-region="true">Loading items...</p>}>
       <div className="grid max-[430px]:grid-cols-1 grid-cols-2 gap-7 place-items-center">
         {items?.map((asteroid: Asteroid) => {
           const reducedData = asteroid.close_approach_data.map((approach) => {
