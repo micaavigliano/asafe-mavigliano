@@ -17,6 +17,8 @@ interface ItemsProps {
 }
 
 export default function Item({ name, minDiameter, maxDiameter, distance, id, magnitude }: ItemsProps) {
+  // I created an itemId state to manage the focus management in the app for accessibility purposes. The functionality is when the modal is open the focus it is placed
+  // in the first interactive element inside the modal and when the modal it is closed the focus it is placed where the button that first fired the action
   const [itemId, setItemId] = useState<number | null>(null);
   const [openModal, setModal] = useState<boolean>(false);
 
