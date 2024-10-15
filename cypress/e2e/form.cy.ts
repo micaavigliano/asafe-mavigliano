@@ -32,7 +32,7 @@ describe('template spec', () => {
   })
 
   it('the user creates a new user', () => {
-    cy.get('[data-testid="email-input"]').type('test4@gmail.com');
+    cy.get('[data-testid="email-input"]').type('test5@gmail.com');
     cy.get('[data-testid="password-input"]').type('password123');
     cy.get('button').contains('Create new account').click();
     cy.get('[data-test-id="title-cypress"]').should('have.text', 'Sign up');
