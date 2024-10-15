@@ -35,12 +35,19 @@
     "jest.setup.ts",
     "jest.config.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
   "types": [
     "node",
     "jest",
     "@testing-library/jest-dom"
+  ], 
+  "exclude": [
+    "node_modules/",
+    "build/",
+    "dist/",
+    ".cache/",
+    ".tmp/",
+    "src/admin/",
+    "**/*.test.*",
+    "src/plugins/**"
   ]
 }
