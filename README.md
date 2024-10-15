@@ -26,3 +26,5 @@ Please bare in mind that in order to make the DB run locally you will need a glo
 ## Additional information
 
 In the future I would like to incorpate i18n to handle the translations.
+
+Thanks for reading!! Mica ✨
