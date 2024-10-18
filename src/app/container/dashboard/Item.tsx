@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { GiAsteroid } from "react-icons/gi";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
@@ -22,10 +22,10 @@ export default function Item({ name, minDiameter, maxDiameter, distance, id, mag
   const [itemId, setItemId] = useState<number | null>(null);
   const [openModal, setModal] = useState<boolean>(false);
 
-  const handleClick = (idValue: number) => {
+  const handleClick = useCallback((idValue: number) => {
     setItemId(Number(idValue));
     setModal(true);
-  };
+  }, [])
 
   const closeModal = () => {
     setModal(false);
