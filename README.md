@@ -4,10 +4,9 @@ This is a dashboard to learn a little bit more about asteroids [Asteroid App](ht
 
 1. clone the repo
 2. run `npm install`
-3. in order to make tests run successfully please use the node version `18.19.1` (change the node version using nvm). We need to downgrade the version of node in order to make the tests work.
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-5. to run react testing library tests: `npm run test`
-6. to run E2E cypress tests: `npm run cypress:open`
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. to run react testing library tests: `npm run test`
+5. to run E2E cypress tests: `npm run cypress:open`
 Please bare in mind that in order to make the DB run locally you will need a global variable. I will add it on the email. If not necessary, on production works successfully. 
 
 ## Architecture
