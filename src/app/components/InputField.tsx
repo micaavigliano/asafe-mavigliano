@@ -24,6 +24,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           ref={ref}
           id={id}
           className="p-2 border rounded text-center text-neutral-950 dark:text-neutral-300 outline outline-2"
+          autoComplete='auto'
         />
       </div>
     );

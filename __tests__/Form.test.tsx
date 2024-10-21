@@ -19,7 +19,6 @@ jest.mock('next/router', () => ({
 }));
 
 describe("Form", () => {
-  const mockedSignIn = signIn as jest.Mock;
   const push = jest.fn();
 
   beforeEach(() => {
@@ -65,7 +64,7 @@ describe("Form", () => {
       })
     ) as jest.Mock;
 
-    await expect(createUser('test@example.com', 'password123')).rejects.toThrow(  // <-- Awaiting promise
+    await expect(createUser('test@example.com', 'password123')).rejects.toThrow(
       'Invalid credentials'
     );
 
@@ -94,7 +93,7 @@ describe("Form", () => {
   });
   
   it('shows an error message', async() => {
-    const { getByLabelText, getByTestId} = render(<Form />);
+    const { getByLabelText, getByTestId } = render(<Form />);
 
     const emailInput = getByLabelText(/your email/i);
     const passwordInput = getByLabelText(/your password/i);
@@ -107,5 +106,20 @@ describe("Form", () => {
     await waitFor(() => {
       expect(getByTestId('error-msg')).toHaveTextContent('Password must be at least 7 characters long.');
     });
+  });
+
+  it('shows an error message when there is no email or password', async () => {
+    const {getByLabelText, getByTestId} = render(<Form />);
+    const inputEmail = getByLabelText(/your email/i);
+    const inputPassword = getByLabelText(/your password/i);
+    const submitButton = getByTestId('button-switch');
+
+    fireEvent.change(inputEmail, { target: { value: '' } });
+    fireEvent.change(inputPassword, { target: { value: 'short' } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(getByTestId('error-msg')).toHaveTextContent('Please provide both email and password.');
+    })
   });
 });

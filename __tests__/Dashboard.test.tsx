@@ -67,5 +67,5 @@ describe('dashboard', () => {
     await waitFor(() => {
       expect(push).toHaveBeenCalledWith('/auth');
     });
-  })
+  });
 });

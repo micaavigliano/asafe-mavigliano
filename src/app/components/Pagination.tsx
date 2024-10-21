@@ -41,7 +41,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="p-6 flex flex-col items-center text-neutral-950 dark:text-neutral-300">
+    <nav className="p-6 flex flex-col items-center text-neutral-950 dark:text-neutral-300" aria-label="pagination">
       <div className='flex flex-row gap-3 max-[430px]:gap-1'>
         <Button
           variant='link'
@@ -100,7 +100,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, nextPa
       <p>
         Page {currentPage} of {totalPages}
       </p>
-    </div>
+    </nav>
   );
 };
 

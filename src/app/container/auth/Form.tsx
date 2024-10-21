@@ -41,52 +41,54 @@ export function Form() {
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     const email = emailInput.current?.value;
     const password = passwordInput.current?.value;
 
+    console.log(email, password)
+  
     if (!email || !password) {
       setErrorMessage('Please provide both email and password.');
+      return; 
     }
-
-    if (password!.trim().length < 7) {
+  
+    if (password.trim().length < 7) {
       setErrorMessage('Password must be at least 7 characters long.');
       return;
     }
 
     setLoading(true);
-
+  
     if (isLogin) {
       const result = await signIn('credentials', { 
         redirect: false,
         email,
         password
       });
-
+  
       if (!result?.error) {
         router.push('/dashboard');
       } else {
         setErrorMessage(result.error);
       }
-
     } else {
       try {
-        const result = await createUser(email!, password!);
+        const result = await createUser(email, password);
         console.log('User created successfully:', result);
       } catch (error) {
         setErrorMessage((error as Error).message || 'Something went wrong during signup.');
       }
     }
-
+  
     setLoading(false);
-  };
+  };  
 
   return (
     <div className="grid max-[430px]:grid-cols-1 grid-cols-2 min-h-screen" data-testid="form-container">
       <section className="flex flex-col justify-center items-center p-6">
         <h1 className="text-xl mb-4 text-center text-neutral-950 dark:text-neutral-300" data-test-id="title-cypress">{isLogin ? 'Login' : 'Sign up'}</h1>
         {errorMessage && <p className="text-red-500 mb-2" data-testid="error-msg" aria-live="polite" live-region="true">{errorMessage}</p>}
-        <form onSubmit={submitHandler} className="flex flex-col w-full max-w-md">
+        <form onSubmit={submitHandler} className="flex flex-col w-full max-w-md" noValidate>
           <InputField type="email" ref={emailInput} label="Your email" id="email-input" dataTestid="email-input" />
           <InputField type="password" ref={passwordInput} label="Your password" id="password-input" dataTestid="password-input" />
           <div className="flex flex-col gap-2 mt-4">
